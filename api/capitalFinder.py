@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 from urllib import parse
 import requests 
+
 class handler(BaseHTTPRequestHandler):
  
   def do_GET(self):
@@ -14,7 +15,7 @@ class handler(BaseHTTPRequestHandler):
     query_list = parse.parse_qsl(url_components.query)
     my_dict = dict(query_list)
 
-    # print(111,my_dict)
+    print(111,my_dict)
     if 'country' in my_dict:
       country = my_dict.get('country')
       url= 'https://restcountries.com/v3.1/name/'
@@ -22,7 +23,7 @@ class handler(BaseHTTPRequestHandler):
       data = res.json()
     #   print(222,data)
     for country in data :
-      capital = country['capital'][0]
+      capital = country.get['capital']
       message = str(capital)
       countries.append(message)
     print(2222,countries)
@@ -30,5 +31,5 @@ class handler(BaseHTTPRequestHandler):
 
 
 
-    self.wfile.write(message.encode())
+    self.wfile.write(message)
     return
